@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TextAnalyzer.Application\TextAnalyzer.Application.csproj" />
+    <ProjectReference Include="..\TextAnalyzer.Infrastructure\TextAnalyzer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

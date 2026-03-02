@@ -14,3 +14,4 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 .idea/
+**/appsettings.Development.json
