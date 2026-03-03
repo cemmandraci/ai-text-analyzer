@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["TextAnalyzer.API/TextAnalyzer.API.csproj", "TextAnalyzer.API/"]
+COPY ["TextAnalyzer.Application/TextAnalyzer.Application.csproj", "TextAnalyzer.Application/"]
+COPY ["TextAnalyzer.Domain/TextAnalyzer.Domain.csproj", "TextAnalyzer.Domain/"]
+COPY ["TextAnalyzer.Infrastructure/TextAnalyzer.Infrastructure.csproj", "TextAnalyzer.Infrastructure/"]
+
+RUN dotnet restore "TextAnalyzer.API/TextAnalyzer.API.csproj"
+
+COPY . .
+
+RUN dotnet publish "TextAnalyzer.API/TextAnalyzer.API.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "TextAnalyzer.API.dll"]

@@ -12,7 +12,7 @@ public class PythonNlpService : INlpService
     private readonly JsonSerializerOptions _jsonOptions;
 
 
-    public PythonNlpService(IHttpClientFactory httpClientFactory, JsonSerializerOptions jsonOptions)
+    public PythonNlpService(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
         _jsonOptions = new JsonSerializerOptions

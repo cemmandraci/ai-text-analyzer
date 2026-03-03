@@ -57,7 +57,7 @@ public class GeminiSentimentService : ISentimentService
         var json = JsonSerializer.Serialize(request, _jsonOptions);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         
-        var url = $"v1beta/models/gemini-2.0-flash:generateContent";
+        var url = $"v1beta/models/gemini-2.5-flash:generateContent";
         client.DefaultRequestHeaders.Add("x-goog-api-key", _apiKey);
         var response = await client.PostAsync(url, content, cancellationToken);
         response.EnsureSuccessStatusCode();

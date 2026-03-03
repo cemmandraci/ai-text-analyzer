@@ -30,8 +30,17 @@ def analyze(request: AnalyzeRequest):
     doc = nlp(request.text)
 
     keywords = list(set([
-        NamedEntity(text=ent.text, type= ent.label_)
-        for ent in doc.ents
+        chunk.text.lower()
+        for chunk in doc.noun_chunks
+        if len(chunk.text) > 2
     ]))
+
+    seen = set()
+    entities = []
+    for ent in doc.ents:
+        key = (ent.text, ent.label_)
+        if key not in seen:
+            seen.add(key)
+            entities.append(NamedEntity(text=ent.text, type=ent.label_))
 
     return AnalyzeResponse(keywords=keywords, entities=entities)
